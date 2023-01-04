@@ -2,7 +2,7 @@
 %  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
 
 %=================================================================
-\documentclass[applsci,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
+\documentclass[atmosphere,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
 
 %=================================================================
 % MDPI internal commands
@@ -30,6 +30,12 @@
 
 %=================================================================
 % Add packages and commands here. The following packages are loaded in our class file: fontenc, inputenc, calc, indentfirst, fancyhdr, graphicx, epstopdf, lastpage, ifthen, lineno, float, amsmath, setspace, enumitem, mathpazo, booktabs, titlesec, etoolbox, tabto, xcolor, soul, multirow, microtype, tikz, totcount, changepage, attrib, upgreek, cleveref, amsthm, hyphenat, natbib, hyperref, footmisc, url, geometry, newfloat, caption
+\graphicspath{{figures/}} % path to folder with figures
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{gensymb} % for \textdegree
+\usepackage{tabularx}
 
 %=================================================================
 %% Please use the following mathematics environments: Theorem, Lemma, Corollary, Proposition, Characterization, Property, Problem, Example, ExamplesandDefinitions, Hypothesis, Remark, Definition, Notation, Assumption
@@ -60,7 +66,7 @@
 
 % Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
 \address{%
-$^{1}$ \quad Université Libre de Bruxelles, École polytechnique de Bruxelles (EPB, Brussels Faculty of Engineering), Laboratory of Image Synthesis and Analysis, Building L, Campus de Solbosch, ULB -- LISA CP165/57, Avenue Franklin D. Roosevelt 50, B-1050, Brussels, Belgium}
+$^{1}$ \quad Laboratory of Image Synthesis and Analysis (LISA), École polytechnique de Bruxelles (Brussels Faculty of Engineering), Université Libre de Bruxelles (ULB). Building L, Campus de Solbosch, ULB -- LISA CP165/57, Avenue Franklin D. Roosevelt 50, B-1050, Brussels, Belgium}
 
 % Contact information of the corresponding author
 \corres{Correspondence: polina.lemenkova@ulb.be; Tel.: +32471860459 (P.L.)}
@@ -77,15 +83,6 @@ $^{1}$ \quad Université Libre de Bruxelles, École polytechnique de Bruxelles (
 \JEL{Y91; Q20; Q24; Q23; Q3; Q01; R11; O44; O13; Q5; Q51; Q55; N57; C6; C61}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Only for the journal Diversity
-%\LSID{\url{http://}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% Only for the journal Applied Sciences
-\featuredapplication{Authors are encouraged to provide a concise description of the specific application or a potential application of the work. This section is not mandatory.}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{document}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -96,7 +93,6 @@ $^{1}$ \quad Université Libre de Bruxelles, École polytechnique de Bruxelles (
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
-
 
 Bulleted lists look like this:
 \begin{itemize}
@@ -124,8 +120,9 @@ Numbered lists can be added as follows:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{6pt} 
 
+\authorcontributions{Supervision, conceptualization, methodology, software, resources, funding acquisition, and project administration, O.D.; writing---original draft preparation, methodology, software, data curation, visualization, formal analysis, validation, writing---review and editing, and investigation, P.L. All authors have read and agreed to the published version of the manuscript.}
 
-\funding{The APC was funded by the Multidisciplinary Digital Publishing Institute (MDPI).}
+\funding{The publication was funded by the Editorial Office of XXXX, Multidisciplinary Digital Publishing Institute (MDPI), by providing 100\% discount for the APC of this manuscript. This project was supported by the Federal Public Planning Service Science Policy or Belgian Science Policy Office, Federal Science Policy - BELSPO (B2/202/P2/SEISMOSTORM).}
 
 \institutionalreview{Not applicable}
 
@@ -133,7 +130,7 @@ Numbered lists can be added as follows:
 
 \dataavailability{Not applicable} 
 
-\acknowledgments{We thank the two anonymous reviewers for comments and reading of this manuscript}
+\acknowledgments{The authors thank the anonymous reviewers of Land for reading, suggestions and comments that improved an earlier version of this manuscript.}
 
 \conflictsofinterest{The authors declare no conflict of interest} 
 
