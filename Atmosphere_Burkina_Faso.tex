@@ -66,7 +66,7 @@
 
 % Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
 \address{%
-$^{1}$ \quad Laboratory of Image Synthesis and Analysis (LISA), École polytechnique de Bruxelles (Brussels Faculty of Engineering), Université Libre de Bruxelles (ULB). Building L, Campus de Solbosch, ULB -- LISA CP165/57, Avenue Franklin D. Roosevelt 50, B-1050, Brussels, Belgium}
+$^{1}$ \quad Laboratory of Image Synthesis and Analysis (LISA), École polytechnique de Bruxelles (Brussels Faculty of Engineering), Université Libre de Bruxelles (ULB). Building L, Campus du Solbosch, ULB -- LISA CP165/57, Avenue Franklin D. Roosevelt 50, B-1050, Brussels, Belgium}
 
 % Contact information of the corresponding author
 \corres{Correspondence: polina.lemenkova@ulb.be; Tel.: +32471860459 (P.L.)}
@@ -90,11 +90,65 @@ Situated in the southern Sahel zone, Burkina Faso experiences one of the most ex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
+In this work we consider the problem of satellite image processing for environmental mapping using programming methods and machine learning approaches. Over the last few years this topic has received a growing amount of attention in the Earth sciences and geospatial community \cite{4779429,jimaging8120317,DIMOBE2022100768,app122412554}. We argue, however, that nearly all existing research papers on environmental mapping of Botswana have focused on using traditional Geographic Information Systems (GIS) \cite{Augusseau,AFR350,1525946,hydrology9010012,land7040124,ZOUNGRANA201866,Forkuor}. Such approaches reflected the convenient functionality and characteristics of the most popular GIS software with Graphical User's Interface (GUI) such as Erdas Imaging, ArcGIS, ENVI GIS, Idrisi GIS, SAGA GIS and others. Nevertheless, the programming approaches offer more advanced performance of spatial data processing in terms of computational effectiveness, speed and effectiveness of mapping, image classification accuracy and oprimised cartographic workflow, due to the high level of automation and repeatability of scripts.
+
+\section{Study Area}
+
+The vegetation, of the Sahelian type, is distributed according to the major geomorphological units with a latitudinal orientation, that of the Pleistocene dune belts. It is everywhere, especially around ponds, the result of intense anthropogenic pressure \cite{Ballouche}.
+
+A moderate production of cotton (less than 1 t/ha) also contributed to the development of traditional agrarian cropping systems in the savannahs of Burkina Faso and remains a notable feature of the agricultural and development policies of the country \cite{Soumare}.
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=14.5 cm]{Topo_BF.jpg}
+	\caption{Topographic map of Burkina Faso, West Africa. Mapping software: GMT scripting toolset. Data source: GEBCO/SRTM. Cartography: authors.
+	\label{fig01}}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Materials and Methods}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Results}
+
+\begin{figure}[H]
+     \begin{subfigure}[r]{0.50\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=7.0cm]{BF_Tmin_2013.jpg}
+     \end{subfigure}\hspace{1mm}
+     \begin{subfigure}[r]{0.50\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=7.0cm]{BF_Tmin_2020.jpg}
+     \end{subfigure}
+  \caption{Minimum temperature for Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
+        \label{figTmin}
+\end{figure}
+
+\begin{figure}[H]
+     \begin{subfigure}[r]{0.50\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=7.0cm]{BF_pet_2013.jpg}
+     \end{subfigure}\hspace{1mm}
+     \begin{subfigure}[r]{0.50\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=7.0cm]{BF_pet_2020.jpg}
+     \end{subfigure}
+  \caption{Potential evapotranspiration (PET) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
+        \label{figPET}
+\end{figure}
+
+\begin{figure}[H]
+     \begin{subfigure}[r]{0.50\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=7.0cm]{BF_aet_2013.jpg}
+     \end{subfigure}\hspace{1mm}
+     \begin{subfigure}[r]{0.50\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=7.0cm]{BF_aet_2020.jpg}
+     \end{subfigure}
+  \caption{Actual evapotranspiration (AET) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
+        \label{figAET}
+\end{figure}
 
 Bulleted lists look like this:
 \begin{itemize}
