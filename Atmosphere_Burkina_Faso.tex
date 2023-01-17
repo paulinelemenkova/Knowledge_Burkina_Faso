@@ -90,9 +90,11 @@ Situated in the southern Sahel zone, Burkina Faso experiences one of the most ex
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Introduction}
 
-In this work we consider the problem of satellite image processing for environmental mapping using programming methods and machine learning approaches. Over the last few years this topic has received a growing amount of attention in the Earth sciences and geospatial community \cite{4779429,jimaging8120317,DIMOBE2022100768,app122412554}. We argue, however, that nearly all existing research papers on environmental mapping of Botswana have focused on using traditional Geographic Information Systems (GIS) \cite{Augusseau,AFR350,1525946,hydrology9010012,land7040124,ZOUNGRANA201866,Forkuor}. Such approaches reflected the convenient functionality and characteristics of the most popular GIS software with Graphical User's Interface (GUI) such as Erdas Imaging, ArcGIS, ENVI GIS, Idrisi GIS, SAGA GIS and others. Nevertheless, the programming approaches offer more advanced performance of spatial data processing in terms of computational effectiveness, speed and effectiveness of mapping, image classification accuracy and oprimised cartographic workflow, due to the high level of automation and repeatability of scripts.
+In this work we consider the problem of satellite image processing for climate and environmental mapping using programming methods and machine learning approaches. Over the last few years this topic has received a growing amount of attention in the Earth sciences and geospatial community \cite{4779429,jimaging8120317,DIMOBE2022100768,app122412554}. We argue, however, that nearly all existing research papers on environmental mapping of Botswana have focused on using traditional Geographic Information Systems (GIS) \cite{Augusseau,AFR350,1525946,hydrology9010012,land7040124,ZOUNGRANA201866,Forkuor}. Such approaches reflected the convenient functionality and characteristics of the most popular GIS software with Graphical User's Interface (GUI) such as Erdas Imaging, ArcGIS, ENVI GIS, Idrisi GIS, SAGA GIS and others. Nevertheless, the programming approaches offer more advanced performance of spatial data processing in terms of computational effectiveness, speed and effectiveness of mapping, image classification accuracy and oprimised cartographic workflow, due to the high level of automation and repeatability of scripts.
 
 \section{Study Area}
+
+The highest mountain in Burkina Faso is Ténakourou (749 m), located in a sandstone plateau area in the west part of the country close to the border with Mali, Figure \ref{fig01}.
 
 The vegetation, of the Sahelian type, is distributed according to the major geomorphological units with a latitudinal orientation, that of the Pleistocene dune belts. It is everywhere, especially around ponds, the result of intense anthropogenic pressure \cite{Ballouche}.
 
@@ -100,7 +102,7 @@ A moderate production of cotton (less than 1 t/ha) also contributed to the devel
 
 \begin{figure}[H]
 \centering
-	\includegraphics[width=14.5 cm]{Topo_BF.jpg}
+	\includegraphics[width=14.5 cm]{Fig_01.jpg}
 	\caption{Topographic map of Burkina Faso, West Africa. Mapping software: GMT scripting toolset. Data source: GEBCO/SRTM. Cartography: authors.
 	\label{fig01}}
 \end{figure}
@@ -116,7 +118,7 @@ A moderate production of cotton (less than 1 t/ha) also contributed to the devel
      \begin{subfigure}[r]{0.5\textwidth}
          \caption{} \vspace{1mm}
          	\includegraphics[width=8.5cm]{BF_Tmin_2013.jpg}
-     \end{subfigure}\hspace{10mm}
+     \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.5\textwidth}
              \caption{} \vspace{1mm}
          	\includegraphics[width=8.5cm]{BF_Tmin_2020.jpg}
@@ -128,10 +130,40 @@ A moderate production of cotton (less than 1 t/ha) also contributed to the devel
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
+     \begin{subfigure}[r]{0.5\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_Tmax_2013.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.5\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_Tmax_2020.jpg}
+     \end{subfigure}
+   }
+  \caption{Maximum temperature for Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
+        \label{figTmax}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+     \begin{subfigure}[r]{0.5\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_soil_2013.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.5\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_soil_2020.jpg}
+     \end{subfigure}
+   }
+  \caption{Soil moisture in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
+        \label{figSoil}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.50\textwidth}
          \caption{} \vspace{1mm}
          	\includegraphics[width=8.5cm]{BF_pet_2013.jpg}
-     \end{subfigure}\hspace{10mm}
+     \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.50\textwidth}
              \caption{} \vspace{1mm}
          	\includegraphics[width=8.5cm]{BF_pet_2020.jpg}
@@ -142,16 +174,93 @@ A moderate production of cotton (less than 1 t/ha) also contributed to the devel
 \end{figure}
 
 \begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.50\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=7.0cm]{BF_aet_2013.jpg}
-     \end{subfigure}\hspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_aet_2013.jpg}
+     \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.50\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=7.0cm]{BF_aet_2020.jpg}
+         	\includegraphics[width=8.5cm]{BF_aet_2020.jpg}
      \end{subfigure}
+}
   \caption{Actual evapotranspiration (AET) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
         \label{figAET}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+     \begin{subfigure}[r]{0.50\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_VPD_2013.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.50\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_VPD_2020.jpg}
+     \end{subfigure}
+}
+  \caption{Vapour Pressure Deficit (VPD) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
+        \label{figVPD}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+     \begin{subfigure}[r]{0.50\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_VAP_2013.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.50\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_VAP_2020.jpg}
+     \end{subfigure}
+}
+  \caption{Vapour Pressure (VAP) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
+        \label{figVAP}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+     \begin{subfigure}[r]{0.50\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_SRAD_2013.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.50\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_SRAD_2020.jpg}
+     \end{subfigure}
+}
+  \caption{Downward Surface Shortwave Radiation (SRAD) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
+        \label{figAET}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+     \begin{subfigure}[r]{0.50\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_ws_2013.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.50\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_ws_2020.jpg}
+     \end{subfigure}
+}
+  \caption{Average wind speed in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
+        \label{figWS}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+     \begin{subfigure}[r]{0.50\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_PDSI_2013.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.50\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{BF_PDSI_2020.jpg}
+     \end{subfigure}
+}
+  \caption{PDSI (Palmer Drought Severity Index) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
+        \label{figPDSI}
 \end{figure}
 
 Bulleted lists look like this:
@@ -173,9 +282,10 @@ Numbered lists can be added as follows:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Discussion}
 
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusions}
+
+To handle the complex environmental scenarios encountered in the Burkina Faso due to the climate change, we propose a pairwise comparative mapping and image processing of the data on years 2013 and 2020 for each evaluated climatic and environmental parameter. The presented data visualization by scripts is a semi-automated mapping process run trough a console which is interleaved with adjustment of selected parameters in script for each map according to the data range and extend. Using scripts, we are able to incorporate the spatial contiguity of the geospatial continuum fields and analyse their variability over space, thereby fully realising the potential of the scripting cartographic method. The geospatial representation approach offered by the GMT scripting toolset and R language returns a series of maps showing various environmental parameters over the area of Burkina Faso. Extensive experiments with GMT and R scripts on challenging TerraClimate dataset demonstrate that our method outperforms various state-of-the-art GIS approaches and can be extended on a wider range of complex environmental scenarios in West Africa.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{6pt} 
