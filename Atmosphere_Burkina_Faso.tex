@@ -161,10 +161,6 @@ This study included various data used for mapping climate parameters and land co
 The satellite image analysis was based on the Landsat-8 OLI/TIRS scenes \cite{USGS} for Burkina Faso in years 2013 and 2022 obtained from the USGS repository GloVis. The detailed information on the Landsat imagery is available in supporting technical documentation \cite{Landsat9}. The major bands of the Landsat-8 OLI/TIRS have 11 spectral bands with resolution of 30 meters in most of the channels. The methodology of satellite image processing in R is based on the existing workflow \cite{jimaging8120317,app122412554}. We computed the Normalised Difference Vegetation Index (NDVI) and performed image classification for land cover changes.
 
 %----------- subsection ----------->
-\subsection{Image porcessing in R}
-In order to evaluate land cover changes and assess changes in vegetation coverage, we examined the tropical  land cover density of forest coverage and health conditions using the Normalised Difference Vegetation Index (NDVI) computed using R language \cite{RCoreTeam}. The main components of the R scripting techniques include libraries \emph{terra, raster} and auxiliary packages such as \emph{RColorBrewer, graphics, rgdal}. The \emph{rgdal} library was used to handle spatial data by integrating R with Geospatial Data Abstraction Library (GDAL) for processing various spatial data formats, including GeoTIFF. The \emph{rgdal} was used to apply the GDAL functionality to read GeoTIFF files into memory, then passes files to the libraries of R. The import, access and conversion of raster datasets to geospatial format were further processed by the RStudio. 
-
-%----------- subsection ----------->
 \subsection{Mapping climate parameters in GMT}
 A series of maps showing variations in the climatic and environmental parameters of Burkina Faso for years 2013 and 2022 has been plotted using the Generic Mapping Tools \cite{Wessel} and existing methods of cartographic scripting described earlier \cite{su142315966,LemenkovaDebeir2022JAES}. Mapping climate parameters in GMT was based on using a series of modules of the following GMT modules:  \emph{gmtset, gmtdefaults, grdcut, makecpt, grdimage, psscale, grdcontour, psbasemap, gmtlogo, psconvert}. The method of GMT works with modular principle where each cartographic element is plotted using a line of code that controls its representation. Moreover, the execution of scripts works for plotting the maps images of diverse source, formats and resolution. The general principles of the GMT cartographic methods are described below in details.
 
@@ -184,7 +180,7 @@ gmt makecpt -C20_hue_sat_light2.cpt -V -T0/74/1 -Ic > pauline.cpt
 \end{verbatim} 
 \end{small}
 
-The image is then visualised using the 'grdimage' module with defined parameters of the spatial extent (-R), projection (-JM6.5i), the effects of the illumination on the map (-I+a15+ne0.75) and auxiliary features: '-X' defining the offset, and  '-t25' defining the 25\% transparency of the background image:
+The image is then visualised using the \emph{'grdimage'} module with defined parameters of the spatial extent (-R), projection (-JM6.5i), the effects of the illumination on the map (-I+a15+ne0.75) and auxiliary features: '-X' defining the offset, and  '-t25' defining the 25\% transparency of the background image:
 
 \begin{small}
 \begin{verbatim}
@@ -193,7 +189,7 @@ gmt grdimage bf_aet2013.nc -Cpauline.cpt -R-6/3/9/15.5 -JM6.5i
 \end{verbatim} 
 \end{small}
 
- Plotting isolines is one of the most widely used of all cartographic techniques: it visualises the constant values of the target variables and enables to analyse the additive relationships between the variables by comparison of several maps if plotted for the same spatial extent. It is most widely used in topographic maps, but also applied in climatic maps to create, e.g., models of temperature or distribution of evapotranspiration, which helps in the analysis of dynamics. Adding isolines was done using 'grdcontour' module: 
+ Plotting isolines is one of the most widely used of all cartographic techniques: it visualises the constant values of the target variables and enables to analyse the additive relationships between the variables by comparison of several maps if plotted for the same spatial extent. It is most widely used in topographic maps, but also applied in climatic maps to create, e.g., models of temperature or distribution of evapotranspiration, which helps in the analysis of dynamics. Adding isolines was done using \emph{'grdcontour'} module: 
  
  \begin{small}
  \begin{verbatim}
@@ -201,7 +197,7 @@ gmt grdimage bf_aet2013.nc -Cpauline.cpt -R-6/3/9/15.5 -JM6.5i
  \end{verbatim} 
  \end{small}
  
- Background geographic elements, such as coastlines, country borders and rivers were plotted on the map using the 'pscoast' module with defined representation of lines: 
+ Background geographic elements, such as coastlines, country borders and rivers were plotted on the map using the \emph{'pscoast'} module with defined representation of lines: 
  
  \begin{small}
  \begin{verbatim}
@@ -209,7 +205,7 @@ gmt pscoast -R -J -P -Ia/thinner,blue -Na -N1/thickest,white -W0.1p -Df -O -K >>
   \end{verbatim} 
  \end{small}
  
- To highlight the study area for a better contrast against the background, a technique of clipping was applied using the 'psclip' module. this enabled to create the map within masked area of neighbouring countries by the following code: 
+ To highlight the study area for a better contrast against the background, a technique of clipping was applied using the \emph{'psclip'} module. this enabled to create the map within masked area of neighbouring countries by the following code: 
  
 \begin{small}
  \begin{verbatim}
@@ -217,31 +213,26 @@ gmt psclip -R-6/3/9/15.5 -JM6.5i BurkinaFaso.txt -O -K >> $ps
    \end{verbatim} 
  \end{small}
  
-It is crucial to add colour legends on the maps for readability and perception of values. The colour legend was plotted on each maps using the 'psscale' of GMT as follows: 
- 
- \begin{small}
- \begin{verbatim}
-gmt psscale -Dg-6.0/8.4+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Cpauline.cpt \
-    --FONT_LABEL=8p,0,black --FONT_ANNOT_PRIMARY=7p,0,black \
-    --FONT_TITLE=6p,0,black -Bg5f0.5a10+l"Colormap palette: '20 hue sat light2' 
-    by scientific plotting tool KST; 0 to 256, discrete, RGB, 241 segments" \
-    -I0.2 -By+l"mm" -O -K >> $ps
-    \end{verbatim} 
- \end{small}
- 
-A grid added on a map is used for spatial interpretation of values and identification of their locations. This was performed using a drawn network of major Eastings and Northings and evenly spaced auxiliary horizontal and vertical lines by module 'psbasemap':
+ A grid added on a map is used for spatial interpretation of values and identification of their locations. This was performed using a drawn network of major Eastings and Northings and evenly spaced auxiliary horizontal and vertical lines by module \emph{'psbasemap'}:
  
  \begin{small}
  \begin{verbatim}
 gmt psbasemap -R -J -MAP_FRAME_AXES=WEsN --FORMAT_GEO_MAP=ddd:mm:ssF \
- -Bpxg2f1a1 -Bpyg2f1a1 -Bsxg2 -Bsyg1 --MAP_TITLE_OFFSET=0.8c \
- --FONT_ANNOT_PRIMARY=8p,0,black --FONT_LABEL=8p,25,black \
- --FONT_TITLE=14p,19,black -B+t"AET (Actual Evapotranspiration) 
+ -Bpxg2f1a1 -Bpyg2f1a1 -Bsxg2 -Bsyg1 -B+t"AET (Actual Evapotranspiration) 
  in Burkina Faso (2013)" -O -K >> $ps
      \end{verbatim} 
  \end{small}
+ 
+It is crucial to add colour legends on the maps for readability and perception of values. The colour legend was plotted on each maps using the \emph{'psscale'} of GMT as follows: 
+ 
+ \begin{small}
+ \begin{verbatim}
+gmt psscale -Dg-6.0/8.4+w16.0c/0.15i+h+o0.3/0i+ml+e -R -J -Cpauline.cpt \
+     -Bg5f0.5a10+l"Colormap palette: <...>" -I0.2 -By+l"mm" -O -K >> $ps
+    \end{verbatim} 
+ \end{small}
 
-The final output of the image file was converted to the high resolution image using GhostScript by the 'psconvert' module: 
+The final output of the image file was converted to the high resolution image using GhostScript by the \emph{'psconvert'} module: 
 
 \begin{small}
 \begin{verbatim}
@@ -249,160 +240,168 @@ gmt psconvert BF_aet_2013.ps -A0.5c -E720 -Tj -Z
 \end{verbatim} 
 \end{small}
  
- The general principle of GMT described above was applied to plotting all the presented climatic and topographic maps using scripts that contained all the sequential lines of code with defined parameters as demonstrated above. Each plotted map was executed from a corresponding script for visualising climate parameters for 2013 and 2022. The full scripts of the GMT codes are presented in the open repository of authors in the GitHub.    
+The general principle of GMT described above was applied to plotting all the presented climatic and topographic maps using scripts that contained all the sequential lines of code with defined parameters as demonstrated above. Each plotted map was executed from a corresponding script for visualising climate parameters for 2013 and 2022. 
+
+The full GMT scripts are presented in the Supplementary Materials of this article.    
+
+%----------- subsection ----------->
+\subsection{Image porcessing in R}
+In order to evaluate land cover changes and assess changes in vegetation coverage, we examined the tropical  land cover density of forest coverage and health conditions using the Normalised Difference Vegetation Index (NDVI) computed using R language \cite{RCoreTeam}. The main components of the R scripting techniques include libraries \emph{terra, raster} and auxiliary packages such as \emph{RColorBrewer, graphics, rgdal}. The \emph{rgdal} library was used to handle spatial data by integrating R with Geospatial Data Abstraction Library (GDAL) for processing various spatial data formats, including GeoTIFF. The \emph{rgdal} was used to apply the GDAL functionality to read GeoTIFF files into memory, then passes files to the libraries of R. The import, access and conversion of raster datasets to geospatial format were further processed by the RStudio. 
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Results}
+In this section, we provide a comprehensive description and analysis of the climatic data obtained from the TerraClimate dataset for Burkina Faso both for 2013 and 2022. Furthermore, we compare the changes in the parameters in the spatio-temporal extent with regard to the geographic setting of the country. Figure 
+
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.5\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_Tmin_2013.jpg}
+         	\includegraphics[width=8.5cm]{Fig_02a.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.5\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_Tmin_2020.jpg}
+         	\includegraphics[width=8.5cm]{Fig_02b.jpg}
      \end{subfigure}
    }
   \caption{Minimum temperature for Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
-        \label{figTmin}
+        \label{fig02}
 \end{figure}
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.5\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_Tmax_2013.jpg}
+         	\includegraphics[width=8.5cm]{Fig_03a.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.5\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_Tmax_2020.jpg}
+         	\includegraphics[width=8.5cm]{Fig_03b.jpg}
      \end{subfigure}
    }
   \caption{Maximum temperature for Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
-        \label{figTmax}
+        \label{fig03}
 \end{figure}
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.5\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_soil_2013.jpg}
+         	\includegraphics[width=8.5cm]{Fig_04a.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.5\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_soil_2020.jpg}
+         	\includegraphics[width=8.5cm]{Fig_04b.jpg}
      \end{subfigure}
    }
   \caption{Soil moisture in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
-        \label{figSoil}
+        \label{fig04}
 \end{figure}
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.50\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_pet_2013.jpg}
+         	\includegraphics[width=8.5cm]{Fig_05a.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.50\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_pet_2020.jpg}
+         	\includegraphics[width=8.5cm]{Fig_05b.jpg}
      \end{subfigure}
 }
   \caption{Potential evapotranspiration (PET) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
-        \label{figPET}
+        \label{fig05}
 \end{figure}
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.50\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_aet_2013.jpg}
+         	\includegraphics[width=8.5cm]{Fig_06a.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.50\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_aet_2020.jpg}
+         	\includegraphics[width=8.5cm]{Fig_06b.jpg}
      \end{subfigure}
 }
   \caption{Actual evapotranspiration (AET) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
-        \label{figAET}
+        \label{fig06}
 \end{figure}
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.50\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_VPD_2013.jpg}
+         	\includegraphics[width=8.5cm]{Fig_07a.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.50\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_VPD_2020.jpg}
+         	\includegraphics[width=8.5cm]{Fig_07b.jpg}
      \end{subfigure}
 }
   \caption{Vapour Pressure Deficit (VPD) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
-        \label{figVPD}
+        \label{fig07}
 \end{figure}
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.50\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_VAP_2013.jpg}
+         	\includegraphics[width=8.5cm]{Fig_08a.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.50\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_VAP_2020.jpg}
+         	\includegraphics[width=8.5cm]{Fig_08b.jpg}
      \end{subfigure}
 }
   \caption{Vapour Pressure (VAP) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
-        \label{figVAP}
+        \label{fig08}
 \end{figure}
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.50\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_SRAD_2013.jpg}
+         	\includegraphics[width=8.5cm]{Fig_09a.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.50\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_SRAD_2020.jpg}
+         	\includegraphics[width=8.5cm]{Fig_09b.jpg}
      \end{subfigure}
 }
   \caption{Downward Surface Shortwave Radiation (SRAD) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
-        \label{figAET}
+        \label{fig09}
 \end{figure}
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.50\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_ws_2013.jpg}
+         	\includegraphics[width=8.5cm]{Fig_10a.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.50\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_ws_2020.jpg}
+         	\includegraphics[width=8.5cm]{Fig_10b.jpg}
      \end{subfigure}
 }
   \caption{Average wind speed in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
-        \label{figWS}
+        \label{fig10}
 \end{figure}
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.50\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_PDSI_2013.jpg}
+         	\includegraphics[width=8.5cm]{Fig_11a.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.50\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{BF_PDSI_2020.jpg}
+         	\includegraphics[width=8.5cm]{Fig_11b.jpg}
      \end{subfigure}
 }
   \caption{PDSI (Palmer Drought Severity Index) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
-        \label{figPDSI}
+        \label{fig11}
 \end{figure}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
