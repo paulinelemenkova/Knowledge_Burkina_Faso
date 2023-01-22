@@ -256,6 +256,74 @@ In order to evaluate land cover changes and assess changes in vegetation coverag
 	\label{fig02}}
 \end{figure}
  
+ \subsection{NDVI Computation}
+ 
+The calculation of the Normalized Difference Vegetation Index (NDVI) for the years 2013 and 2022 of the target area of Burkina Faso was performed in RStudio using the following codes: 
+ 
+\begin{small}
+\begin{verbatim}
+library(terra)
+install.packages("pals")
+library(pals)
+library(RColorBrewer)
+setwd("/Users/polinalemenkova/Documents/R/52_Image_Processing/
+LC08_L2SP_195051_20130520_20200912_02_T1")
+# 1. NDVI = (NIR - R) / (NIR + R), i.e., NDVI = (Band 5 – Band 4) / (Band 5 + Band 4).
+vi <- function(img, k, i) {
+  bk <- img[[k]]
+  bi <- img[[i]]
+  vi <- (bk - bi) / (bk + bi)
+  return(vi)
+}
+# For Landsat NIR = 5, red = 4.
+filenames <- paste0('LC08_L2SP_195051_20130520_20200912_02_T1_SR_B', 1:7, ".tif")
+filenames
+landsat <- rast(filenames)
+landsat
+ndvi <- vi(landsat, 5, 4)
+# defining color palette
+colors <- stepped()
+plot(ndvi, col = colors, font.main = 1, main = "NDVI for Landsat-8 OLI/TIRS C1 image 
+LC08_L2SP_195051_20130520_20200912_02_T1_SR_B: central Burkina Faso", cex.main=0.9)
+# Plotting the histogram of the NDVI
+hist(ndvi, font.main = 1, main = "NDVI values for Landsat-8 OLI/TIRS C1 image
+\nLC08_L2SP_195051_20130520_20200912_02_T1_SR_B: central Burkina Faso", 
+ xlab = "NDVI", ylab= "Frequency", col = "springgreen2", xlim = c(-0.5, 0.5), 
+breaks = 30, xaxt = "n") axis(side=1, at = seq(-0.6, 0.5, 0.1), 
+labels = seq(-0.6, 0.5, 0.1))
+\end{verbatim} 
+\end{small}
+
+Likewise, this code was applied for the year 2022 with adjusted colour palette from the RColorBrewer $brewer.pal(11, "Spectral")$ for the bands of the Landsat-8 OLI/TIRS image $LC08\_L2SP\_195051\_20220513\_20220519\_02\_T1$.
+
+ \subsection{SAVI Computation}
+The calculation of the Soil Adjusted Vegetation Index (SAVI) for the target area of Burkina Faso was performed in RStudio using the following code (example of 2013): 
+
+\begin{small}
+\begin{verbatim}
+SAVI = ((Band 5 – Band 4) / (Band 5 + Band 4 + 0.5)) * (1.5).
+savi_fun = function(nir, red){
+  ((nir - red) / (nir + red + 0.5)) * 1.5
+}
+savi = lapp(landsat[[c(4, 3)]],
+            fun = savi_fun)
+plot(savi, col = brewer.pal(11, "Spectral"), font.main = 2, main = 
+"Soil Adjusted Vegetation Index (SAVI) for Landsat-8 OLI/TIRS C1 image 
+\nLC08_L2SP_195051_20130520_20200912_02_T1_SR_B: 
+central Burkina Faso", cex.main=1.0)
+hist(savi, font.main = 1, main = "SAVI values for Landsat-8 OLI/TIRS C1 image 
+\nLC08_L2SP_195051_20130520_20200912_02_T1_SR_B: central Burkina Faso", 
+xlab = "SAVI", ylab= "Frequency", col = "firebrick2", xlim = c(-0.4, 0.4),  
+breaks = 30, xaxt = "n") axis(side=1, at = seq(-0.4, 0.4, 0.1), 
+labels = seq(-0.4, 0.4, 0.1))
+\end{verbatim} 
+\end{small}
+
+The same code was repeated for the year 2022 for the files of the Landsat-8 OLI/TIRS image $LC08\_L2SP\_195051\_20220513\_20220519\_02\_T1$.
+
+ \subsection{Unsupervised Classification}
+The unsupervised classification for both years (2013 and 2022) was performed using the following code: 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Results}
