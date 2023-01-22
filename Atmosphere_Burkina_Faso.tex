@@ -156,9 +156,16 @@ In contrast to drought and desertification related to precipitation and rainfall
 
 %----------- subsection ----------->
 \subsection{Data}
-This study included various data used for mapping climate parameters and land cover types. The climatic maps are based on the use of the TerraClimate high-resolution dataset showing monthly climate parameters \cite{Abatzoglou}. The general topographic map showing study area and the extent of the Burkina Faso in regional and global scales are based on the GEBCO/SRTM raster grid \cite{GEBCO}. 
+This study included various data used for mapping climate parameters and land cover types. The climatic maps are based on the use of the TerraClimate high-resolution dataset showing monthly climate parameters \cite{Abatzoglou}. The general topographic map showing study area and the extent of the Burkina Faso in regional and global scales are based on the GEBCO/SRTM raster grid \cite{GEBCO}. The satellite image analysis was based on the Landsat-8 OLI/TIRS scenes \cite{USGS} for Burkina Faso in years 2013 and 2022 obtained from the USGS repository \href{https://earthexplorer.usgs.gov/}{EarthExplorer}, Figure \ref{fig02}. 
 
-The satellite image analysis was based on the Landsat-8 OLI/TIRS scenes \cite{USGS} for Burkina Faso in years 2013 and 2022 obtained from the USGS repository \href{https://earthexplorer.usgs.gov/}{EarthExplorer}. The detailed information on the Landsat imagery is available in supporting technical documentation \cite{Landsat9}. The major bands of the Landsat-8 OLI/TIRS have 11 spectral bands with resolution of 30 meters in most of the channels. The methodology of satellite image processing in R is based on the existing workflow \cite{jimaging8120317,app122412554}. We computed the Normalised Difference Vegetation Index (NDVI) and performed image classification for land cover changes.
+The detailed information on the Landsat imagery is available in supporting technical documentation \cite{Landsat9}. The major bands of the Landsat-8 OLI/TIRS have 11 spectral bands with resolution of 30 meters in most of the channels. Using the Landsat OLI/TIRS images, we examined the difference in land cover density of tropical forest coverage for 2013 and 2022 using the unsupervised classification of the two Landsat satellite images for 2013 and 2022. The evaluation of the plant health conditions was computed using two vegetation indices for the 2013 and 2022: the Normalised Difference Vegetation Index (NDVI) and the Soil Adjusted Vegetation Index (SAVI). We computed the Normalised Difference Vegetation Index (NDVI) and performed image classification for land cover changes.
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=14.5 cm]{Fig_02.jpg}
+	\caption{Data capture from the EarthExplorer repository of the USGS: Landsat-8 OLI/TIRS satellite image, central Burkina Faso, Ouagadougou. Background image: ESRI World imagery.
+	\label{fig02}}
+\end{figure}
 
 %----------- subsection ----------->
 \subsection{Mapping climate parameters in GMT}
@@ -246,15 +253,7 @@ The full GMT scripts are presented in the Supplementary Materials of this articl
 
 %----------- subsection ----------->
 \subsection{Image porcessing in R}
-The satellite image processing in R was applied to the 
-In order to evaluate land cover changes and assess changes in vegetation coverage, we examined the tropical  land cover density of forest coverage and health conditions using the Normalised Difference Vegetation Index (NDVI) computed using R language \cite{RCoreTeam}. The main components of the R scripting techniques include libraries \emph{terra, raster} and auxiliary packages such as \emph{RColorBrewer, graphics, rgdal}. The \emph{rgdal} library was used to handle spatial data by integrating R with \href{https://gdal.org/}{Geospatial Data Abstraction Library (GDAL)} for processing various spatial data formats, including GeoTIFF. The \emph{rgdal} was used to apply the GDAL functionality to read GeoTIFF files into memory, then passes files to the libraries of R. The import, access and conversion of raster datasets to geospatial format were further processed by the RStudio. 
-
-\begin{figure}[H]
-\centering
-	\includegraphics[width=14.5 cm]{Fig_02.jpg}
-	\caption{Data capture from the EarthExplorer repository of the USGS: Landsat-8 OLI/TIRS satellite image, central Burkina Faso, Ouagadougou. Background image: ESRI World imagery.
-	\label{fig02}}
-\end{figure}
+The satellite image processing was performed to evaluate land cover changes and shift in vegetation coverage using libraries of R language \cite{RCoreTeam}. The methodology of satellite image processing in R is based on the existing workflow \cite{jimaging8120317,app122412554}. The main components of the R scripting techniques include libraries \emph{terra, raster} and auxiliary packages such as \emph{RColorBrewer, graphics, rgdal}. The \emph{rgdal} library was used to handle spatial data by integrating R with \href{https://gdal.org/}{Geospatial Data Abstraction Library (GDAL)} for processing various spatial data formats, including GeoTIFF. The \emph{rgdal} was used to apply the GDAL functionality to read GeoTIFF files into memory, then passes files to the libraries of R. The import, access and conversion of raster datasets to geospatial format were further processed by the RStudio. 
  
  \subsection{NDVI Computation}
  
@@ -377,9 +376,8 @@ unC
 Here the major steps included first stacking a collection of the objects from RasterLayer initially stored in the channels of the Landsat bands. Since bands have the same spatial extent and resolution for multi-spectral bands (except for thermal band which was not used for classification in this case), a stack of these files was created using the RasterStack function of R in raster library. Thus, RasterStack was formed from the separate Landsat OLI/TIRS bands from a few layers. Once it was created, a RasterBrick was made on the next step as a multi-layer raster object. This matrix was used further for clustering performed as unsupervised classification of the two images. Its attributes are listed in the code snippet above showing the coordinate extent, resolution, dimensions and other metadata. Afterwards the clustering was done using the 'unsuperClass' command of 'raster' library. The computed results are reported in the Appendices. 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\pagebreak
 \section{Results and Discussion}
-In this section, we provide a comprehensive description and analysis of the climatic data obtained from the TerraClimate dataset for Burkina Faso both for 2013 and 2022. Furthermore, we compare the changes in the parameters in the spatio-temporal extent with regard to the geographic setting of the country. In Figure \ref{fig03}, we show the results of the visualized variations in minimal annual temperature over Burkina Faso for 2013 and 2022 obtained from the interpolate data from surface observations. The data extent for 2013 ranges from 10.47°C to 20.56°C, while the data for 2022 has the extent from 11.70°C to 21.20°C which clearly shows the increase of the temperature on 1°C over 9 years. 
+In this section, we provide a comprehensive description and analysis of the climatic data obtained from the TerraClimate dataset for Burkina Faso both for 2013 and 2022. Furthermore, we compare the changes in the parameters in the spatio-temporal extent with regard to the geographic setting of the country. In Figure \ref{fig03}, we show the results of the visualized variations in minimal annual temperature over Burkina Faso for 2013 and 2022 obtained from the interpolate data from surface observations. 
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -396,7 +394,7 @@ In this section, we provide a comprehensive description and analysis of the clim
         \label{fig03}
 \end{figure}
 
-The interannual variability in maximal temperature ranging from 27.78°C to 37.14°C in 2013 against 28.20°C to 37.00°C in 2020 is compared with spatial variability in topography of Burkina Faso at regional scale, Figure \ref{fig04}. 
+The data extent for 2013 ranges from 10.47°C to 20.56°C, while the data for 2022 has the extent from 11.70°C to 21.20°C which clearly shows the increase of the temperature on 1°C over 9 years. The interannual variability in maximal temperature ranging from 27.78°C to 37.14°C in 2013 against 28.20°C to 37.00°C in 2020 is compared with spatial variability in topography of Burkina Faso at regional scale, Figure \ref{fig04}. 
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -535,46 +533,48 @@ The variations in values of Palmer Drought Severity Index (PDSI) in Burkina Faso
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.50\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{Fig_12a.jpg}
+         	\includegraphics[width=8.0cm]{Fig_12a.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.50\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{Fig_12b.jpg}
+         	\includegraphics[width=8.0cm]{Fig_12b.jpg}
      \end{subfigure}
 }
   \caption{PDSI (Palmer Drought Severity Index) in Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
         \label{fig12}
 \end{figure}
 
-The Normalized Difference Vegetation Index (NDVI) is used used to compute the values of the vegetation greenness using classifier-based approach in R (Figure \ref{fig13}). In this approach, the basis classes of NDVI values are defined directly as the categories of the vegetation density based on the spectral reflectance of the plants in bands 4 and 5 of the Landsat images which are used to indicate vegetation health. thus, healthy vegetation has values of close to +1 while medium values are typical for the grassy or shrubby savannah, lower values show sparse vegetation, while negative values indicate water areas. 
-
-The algorithm of NDVI computation by R is trained to recognised   the categories of high NDVI values that correspond to the green and health vegetation typical for forest areas. In contrast, Specifically, the majority of NDVI values for examined images of Burkina Faso show values typical for savannah with values around 0.2. A slight decrease in values is notable when comparing the images for 2013 and 2022 that indicates the processes of desertification (Figure \ref{fig13}).
+The Normalized Difference Vegetation Index (NDVI) is used to compute values of the vegetation greenness using classifier-based approach in R (Figure \ref{fig13}). 
 
 \begin{figure}[H]
-\makebox[0.90\linewidth][r]{%
+\makebox[0.85\linewidth][r]{%
      \begin{subfigure}[r]{0.5\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{Fig_13a.jpg}
+         	\includegraphics[width=8.0cm]{Fig_13a.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.5\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{Fig_13b.jpg}
+         	\includegraphics[width=8.0cm]{Fig_13b.jpg}
      \end{subfigure}
 }\\
 \vfill \vspace{1mm}
-\makebox[0.90\linewidth][r]{%
+\makebox[0.85\linewidth][r]{%
       \begin{subfigure}[r]{0.5\textwidth}
          \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{Fig_13c.jpg}
+         	\includegraphics[width=8.0cm]{Fig_13c.jpg}
      \end{subfigure}\hspace{12mm}
      \begin{subfigure}[r]{0.5\textwidth}
              \caption{} \vspace{1mm}
-         	\includegraphics[width=8.5cm]{Fig_13d.jpg}
+         	\includegraphics[width=8.0cm]{Fig_13d.jpg}
      \end{subfigure}   
    }
   \caption{NDVI for Burkina Faso. \textbf{(a)}: NDVI map (2013); \textbf{(b)}: Histogram (2013); \textbf{(c)}: NDVI map (2022); \textbf{(d)}: Histogram (2022).}
         \label{fig13}
 \end{figure}
+
+In this approach, the basis classes of NDVI values are defined directly as the categories of the vegetation density based on the spectral reflectance of the plants in bands 4 and 5 of the Landsat images which are used to indicate vegetation health. thus, healthy vegetation has values of close to +1 while medium values are typical for the grassy or shrubby savannah, lower values show sparse vegetation, while negative values indicate water areas. 
+
+The algorithm of NDVI computation by R is trained to recognised   the categories of high NDVI values that correspond to the green and health vegetation typical for forest areas. In contrast, Specifically, the majority of NDVI values for examined images of Burkina Faso show values typical for savannah with values around 0.2. A slight decrease in values is notable when comparing the images for 2013 and 2022 that indicates the processes of desertification (Figure \ref{fig13}).
 
 The Soil-Adjusted Vegetation Index (SAVI) method implements the soil-brightness correction factor to lessen the effects from soil brightness (Figure \ref{fig14}). The use of SAVI is especially actual for the northern region of Burkina Faso in southern Sahara Desert where very sparsely vegetated areas are dominated with only sporadic trees. The SAVI index is defined as a difference between the NIR and Red bands in the Landsat adjusted to soil brightness correction factor (L) set as 1/2 to be suitable for most land cover types. For the two examined Landsat OLI/TIRS images of the Burkina Faso for 2013 and 2022, the majority of values of SAVI index lie in the interval of 0.08 to 0.20 in 2013, while for the 2022 the values shift towards the range of 0.06 to 0.18 showing the slight decrease in values typical for healthy vegetation (Figure \ref{fig14}).
 
@@ -606,8 +606,6 @@ The Soil-Adjusted Vegetation Index (SAVI) method implements the soil-brightness 
 
 Land cover changes and dynamics of deforestation in Burkina Faso were compared for the year 2013 (Figure \ref{fig15}) and 2022 (Figure \ref{fig16}) using comparison of the results of clustering performed using unsupervised machine-based classification. While R employs the cluster centroids to render the classifier nonlinear and accurate (see Appendix showing the results of the classifications for each year with reported number of pixels in each of the 10 land cover classes), here we use the non-labeled data for objectivity of clustering by adopting the explicit object features by spectral reflectance of pixels on the images as representations of the land cover classes and landscape dynamics in Burkina Faso. 
 
-The embedded clustering method in R introduced in 'RStoolbox' library of R learns a distance between cluster centroids and assigns each pixels to the target class of the available 10 classes based on the distance between the pixel value and the centroid of each cluster in the observation dataset. the major classes include the following land cover types typical for Burkina Faso: 1) 'bare soil', 2) 'irrigated agricultural areas: cereals and legumes', 3)'water areas and wetlands', 4) 'shrub lands', 5) 'savannah sahélienne' (sahelian short grass savannah), 6) 'savannah soudanienne', 7) 'steppe', 8) 'gallery forests and riparian forests', 9) 'forests', 10) 'urban settlements'. The difference in the land cover classes is mapped for 2013 (Figure \ref{fig15}) and 2022 (Figure \ref{fig16}). The computed difference in each land cover class is reported in the Appendix for images of 2013 and 2022.
-
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.50\textwidth}
@@ -637,6 +635,8 @@ The embedded clustering method in R introduced in 'RStoolbox' library of R learn
   \caption{Analysis of land use cover (LULC) types Burkina Faso. \textbf{(a)}: Landsat-8 OLI/TIRS color composites (4-3-2) for 2022; \textbf{(b)}: Clusters of LULC based on unsupervised classification for 2022.}
         \label{fig16}
 \end{figure}
+
+The embedded clustering method in R introduced in 'RStoolbox' library of R learns a distance between cluster centroids and assigns each pixels to the target class of the available 10 classes based on the distance between the pixel value and the centroid of each cluster in the observation dataset. the major classes include the following land cover types typical for Burkina Faso: 1) 'bare soil', 2) 'irrigated agricultural areas: cereals and legumes', 3)'water areas and wetlands', 4) 'shrub lands', 5) 'savannah sahélienne' (sahelian short grass savannah), 6) 'savannah soudanienne', 7) 'steppe', 8) 'gallery forests and riparian forests', 9) 'forests', 10) 'urban settlements'. The difference in the land cover classes is mapped for 2013 (Figure \ref{fig15}) and 2022 (Figure \ref{fig16}). The computed difference in each land cover class is reported in the Appendix for images of 2013 and 2022.
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \section{Conclusion}
