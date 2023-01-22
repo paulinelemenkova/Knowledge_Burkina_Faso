@@ -546,6 +546,10 @@ The variations in values of Palmer Drought Severity Index (PDSI) in Burkina Faso
         \label{fig12}
 \end{figure}
 
+The Normalized Difference Vegetation Index (NDVI) is used used to compute the values of the vegetation greenness using classifier-based approach in R (Figure \ref{fig13}). In this approach, the basis classes of NDVI values are defined directly as the categories of the vegetation density based on the spectral reflectance of the plants in bands 4 and 5 of the Landsat images which are used to indicate vegetation health. thus, healthy vegetation has values of close to +1 while medium values are typical for the grassy or shrubby savannah, lower values show sparse vegetation, while negative values indicate water areas. 
+
+The algorithm of NDVI computation by R is trained to recognised   the categories of high NDVI values that correspond to the green and health vegetation typical for forest areas. In contrast, Specifically, the majority of NDVI values for examined images of Burkina Faso show values typical for savannah with values around 0.2. A slight decrease in values is notable when comparing the images for 2013 and 2022 that indicates the processes of desertification (Figure \ref{fig13}).
+
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
      \begin{subfigure}[r]{0.5\textwidth}
@@ -571,6 +575,8 @@ The variations in values of Palmer Drought Severity Index (PDSI) in Burkina Faso
   \caption{NDVI for Burkina Faso. \textbf{(a)}: NDVI map (2013); \textbf{(b)}: Histogram (2013); \textbf{(c)}: NDVI map (2022); \textbf{(d)}: Histogram (2022).}
         \label{fig13}
 \end{figure}
+
+The Soil-Adjusted Vegetation Index (SAVI) method implements the soil-brightness correction factor to lessen the effects from soil brightness (Figure \ref{fig14}). The use of SAVI is especially actual for the northern region of Burkina Faso in southern Sahara Desert where very sparsely vegetated areas are dominated with only sporadic trees. The SAVI index is defined as a difference between the NIR and Red bands in the Landsat adjusted to soil brightness correction factor (L) set as 1/2 to be suitable for most land cover types.
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
