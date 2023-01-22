@@ -322,8 +322,59 @@ labels = seq(-0.4, 0.4, 0.1))
 The same code was repeated for the year 2022 for the files of the Landsat-8 OLI/TIRS image $LC08\_L2SP\_195051\_20220513\_20220519\_02\_T1$.
 
  \subsection{Unsupervised Classification}
-The unsupervised classification for both years (2013 and 2022) was performed using the following code: 
+The unsupervised classification for both years (2013 and 2022) was performed using the code available below and results listed in the Appendix for both cases (2013 and 2022). 
 
+\begin{small}
+\begin{verbatim}
+library(rgdal)
+library(raster)
+library(terra)
+library(RColorBrewer)
+library(pals)
+library(colorspace)
+library(RStoolbox)
+library(graphics)
+# Set up working directory
+setwd("/Users/polinalemenkova/Documents/R/52_Image_Processing/
+LC08_L2SP_195051_20130520_20200912_02_T1")
+# Importing data
+Landsat_BF2013 <- list.files("/Users/polinalemenkova/Documents/R/
+52_Image_Processing/LC08_L2SP_195051_20130520_20200912_02_T1")
+# Printing the list
+list.files()
+[1] "LC08_L2SP_195051_20130520_20200912_02_T1_SR_B1.TIF"
+[2] "LC08_L2SP_195051_20130520_20200912_02_T1_SR_B2.TIF"
+[3] "LC08_L2SP_195051_20130520_20200912_02_T1_SR_B3.TIF"
+[4] "LC08_L2SP_195051_20130520_20200912_02_T1_SR_B4.TIF"
+[5] "LC08_L2SP_195051_20130520_20200912_02_T1_SR_B5.TIF"
+[6] "LC08_L2SP_195051_20130520_20200912_02_T1_SR_B6.TIF"
+[7] "LC08_L2SP_195051_20130520_20200912_02_T1_SR_B7.TIF"
+# Stacking the data to create a RasterStack. 
+Landsat_BF2013_stack <- stack(Landsat_BF2013)
+# Turning a stack into a brick. 
+Landsat_BF2013_brick <- brick(Landsat_BF2013_stack)
+# Viewing brick attributes
+Landsat_BF2013_brick
+class      : RasterBrick 
+dimensions : 7281, 7471, 54396351, 7  (nrow, ncol, ncell, nlayers)
+resolution : 30, 30  (x, y)
+extent     : 545085, 769215, 1329285, 1547715  (xmin, xmax, ymin, ymax)
+crs        : +proj=utm +zone=30 +datum=WGS84 +units=m +no_defs 
+source     : r_tmp_2023-01-22_145640_95034_42547.grd 
+names      : LC08_L2SP//2_T1_SR_B1, LC08_L2SP//2_T1_SR_B2, 
+LC08_L2SP//2_T1_SR_B3, LC08_L2SP//2_T1_SR_B4, LC08_L2SP//
+2_T1_SR_B5, LC08_L2SP//2_T1_SR_B6, LC08_L2SP//2_T1_SR_B7 
+min values : 1527, 2952, 8310, 9634, 9791, 9470, 8779 
+max values : 33177, 35035, 42211, 45735, 48008, 56959, 59325
+# Running the classification
+set.seed(25)
+unC <- unsuperClass(Landsat_BF2013_brick, nSamples = 100, 
+	nClasses = 10, nStarts = 5)
+unC
+\end{verbatim} 
+\end{small}
+
+Afterwards, this matrix was used for clustering (unsupervised classification).
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Results}
@@ -546,6 +597,37 @@ The variations in values of Palmer Drought Severity Index (PDSI) in Burkina Faso
         \label{fig14}
 \end{figure}
 
+\pagebreak
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+     \begin{subfigure}[r]{0.50\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.3cm]{Fig_15a.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.50\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=9.5cm]{Fig_15b.jpg}
+     \end{subfigure}
+}
+  \caption{Analysis of land use cover (LULC) types Burkina Faso. \textbf{(a)}: Landsat-8 OLI/TIRS color composites (4-3-2) for 2013; \textbf{(b)}: Clusters of LULC based on unsupervised classification for 2013.}
+        \label{fig15}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+     \begin{subfigure}[r]{0.50\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.3cm]{Fig_16a.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.50\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=7.0cm]{Fig_16b.jpg}
+     \end{subfigure}
+}
+  \caption{Analysis of land use cover (LULC) types Burkina Faso. \textbf{(a)}: Landsat-8 OLI/TIRS color composites (4-3-2) for 2022; \textbf{(b)}: Clusters of LULC based on unsupervised classification for 2022.}
+        \label{fig16}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Discussion}
@@ -599,6 +681,119 @@ Landsat OLI/TIRS & Landsat Operational Land Imager and the Thermal Infrared Sens
 VHR & Very High Resolution 
 \end{tabular}
 }
+
+\appendixtitles{no} % Leave argument "no" if all appendix headings stay EMPTY (then no dot is printed after "Appendix A"). If the appendix sections contain a heading then change the argument to "yes".
+\appendixstart
+\appendix
+\section[\appendixname~\thesection]{}
+\subsection[\appendixname~\thesubsection]{Results of the computed unsupervised classification (2013)}
+\begin{lstlisting}[language=R,numbers=left,caption=\textbf{Results of the clustering of the Landsat-8 OLI/TIRS image (2013)}]
+unsuperClass results
+
+*************** Model ******************
+$model
+K-means clustering with 10 clusters of sizes 
+12, 4, 12, 11, 18, 8, 14, 1, 8, 12
+
+Cluster centroids:
+   LC08_L2SP_195051_20130520_20200912_02_T1_SR_B1
+1                                        9599.417
+2                                        9099.500
+3                                       10990.750
+4                                       10468.000
+5                                        9708.778
+6                                       10022.250
+7                                        9971.857
+8                                        8644.000
+9                                        9177.250
+10                                      10560.250
+   LC08_L2SP_195051_20130520_20200912_02_T1_SR_B2
+1                                       10457.250
+2                                        9865.500
+3                                       12085.750
+4                                       11398.000
+5                                       10611.333
+6                                       10902.500
+7                                       10907.714
+8                                        9627.000
+9                                        9930.375
+10                                      11580.917
+   LC08_L2SP_195051_20130520_20200912_02_T1_SR_B3
+1                                        12754.50
+2                                        11941.00
+3                                        15290.75
+4                                        14130.91
+5                                        13067.61
+6                                        13447.00
+7                                        13600.07
+8                                        11957.00
+9                                        11989.38
+10                                       14613.92
+   LC08_L2SP_195051_20130520_20200912_02_T1_SR_B4
+1                                        14807.42
+2                                        13264.25
+3                                        18427.08
+4                                        16949.27
+5                                        15231.33
+6                                        16301.62
+7                                        16040.43
+8                                        13009.00
+9                                        13817.12
+10                                       17467.50
+   LC08_L2SP_195051_20130520_20200912_02_T1_SR_B5
+1                                        18633.08
+2                                        17763.50
+3                                        22331.33
+4                                        21115.36
+5                                        19915.61
+6                                        20343.62
+7                                        20832.00
+8                                        15951.00
+9                                        17179.50
+10                                       21738.67
+   LC08_L2SP_195051_20130520_20200912_02_T1_SR_B6
+1                                        22669.83
+2                                        19796.75
+3                                        26822.83
+4                                        26232.27
+5                                        23172.50
+6                                        25491.88
+7                                        24233.14
+8                                        16494.00
+9                                        21307.12
+10                                       25430.42
+   LC08_L2SP_195051_20130520_20200912_02_T1_SR_B7
+1                                        18583.08
+2                                        15760.00
+3                                        22718.25
+4                                        22171.91
+5                                        19110.56
+6                                        21400.00
+7                                        20214.29
+8                                        14339.00
+9                                        17072.25
+10                                       21076.58
+
+Within cluster sum of squares by cluster:
+ [1] 16849325  7559750 11280118 10249179 31001897  9960346 14629344        0  9426130
+[10] 17899304
+
+*************** Map ******************
+$map
+class      : RasterLayer 
+dimensions : 7281, 7471, 54396351  (nrow, ncol, ncell)
+resolution : 30, 30  (x, y)
+extent     : 545085, 769215, 1329285, 1547715  (xmin, xmax, ymin, ymax)
+crs        : +proj=utm +zone=30 +datum=WGS84 +units=m +no_defs 
+source     : r_tmp_2023-01-22_145808_95034_17510.grd 
+names      : class 
+values     : 1, 10  (min, max)
+\end{lstlisting}
+
+\begin{lstlisting}[language=R,numbers=left,caption=\textbf{Results of the clustering of the Landsat-8 OLI/TIRS image (2022)}]
+unsuperClass results*************** Model ******************$modelK-means clustering with 10 clusters of sizes 4, 9, 13, 1, 18, 8, 1, 20, 11, 15Cluster centroids:   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B11                                       11011.7502                                        9336.4443                                       10578.7694                                        4754.0005                                        9667.1116                                        8933.1257                                        4468.0008                                       10271.6509                                        9573.81810                                       9855.733   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B21                                        11976.252                                        10192.443                                        11707.314                                         7913.005                                        10677.006                                         9790.007                                         7616.008                                        11237.109                                        10389.8210                                       10789.40   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B31                                        15083.252                                        12363.673                                        14619.314                                        14343.005                                        13239.396                                        11744.127                                        11846.008                                        13903.009                                        12660.7310                                       13184.67   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B41                                        18347.752                                        14332.783                                        17550.464                                        17431.005                                        15494.726                                        13494.007                                        14428.008                                        16494.159                                        15077.2710                                       15543.13   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B51                                        22078.002                                        17967.783                                        21226.544                                        20995.005                                        19791.066                                        16980.627                                        17511.008                                        20518.509                                        18044.8210                                       19395.73   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B61                                        26910.002                                        21401.003                                        24825.084                                        24269.005                                        22311.726                                        19593.887                                        18156.008                                        23698.459                                        22910.7310                                       23910.80   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B71                                        23312.502                                        17217.223                                        20677.924                                        20391.005                                        18186.566                                        16052.627                                        15714.008                                        19731.059                                        18731.3610                                       19561.47Within cluster sum of squares by cluster: [1] 10243744 13359721 29109152        0 28575937 20311570        0 29155830 16295670[10] 14514939*************** Map ******************$mapclass      : RasterLayer dimensions : 7721, 7561, 58378481  (nrow, ncol, ncell)resolution : 30, 30  (x, y)extent     : 545085, 771915, 1322685, 1554315  (xmin, xmax, ymin, ymax)crs        : +proj=utm +zone=30 +datum=WGS84 +units=m +no_defs source     : r_tmp_2023-01-22_155940_745_17510.grd names      : class values     : 1, 10  (min, max)
+\end{lstlisting}
+
 
 \reftitle{References}
 
