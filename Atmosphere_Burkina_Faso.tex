@@ -374,10 +374,11 @@ unC
 \end{verbatim} 
 \end{small}
 
-Afterwards, this matrix was used for clustering (unsupervised classification).
+Here the major steps included first stacking a collection of the objects from RasterLayer initially stored in the channels of the Landsat bands. Since bands have the same spatial extent and resolution for multi-spectral bands (except for thermal band which was not used for classification in this case), a stack of these files was created using the RasterStack function of R in raster library. Thus, RasterStack was formed from the separate Landsat OLI/TIRS bands from a few layers. Once it was created, a RasterBrick was made on the next step as a multi-layer raster object. This matrix was used further for clustering performed as unsupervised classification of the two images. Its attributes are listed in the code snippet above showing the coordinate extent, resolution, dimensions and other metadata. Afterwards the clustering was done using the 'unsuperClass' command of 'raster' library. The computed results are reported in the Appendices. 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
-\section{Results}
+\section{Results and Discussion}
 In this section, we provide a comprehensive description and analysis of the climatic data obtained from the TerraClimate dataset for Burkina Faso both for 2013 and 2022. Furthermore, we compare the changes in the parameters in the spatio-temporal extent with regard to the geographic setting of the country. In Figure \ref{fig03}, we show the results of the visualized variations in minimal annual temperature over Burkina Faso for 2013 and 2022 obtained from the interpolate data from surface observations. The data extent for 2013 ranges from 10.47°C to 20.56°C, while the data for 2022 has the extent from 11.70°C to 21.20°C which clearly shows the increase of the temperature on 1°C over 9 years. 
 
 \begin{figure}[H]
@@ -630,7 +631,7 @@ The variations in values of Palmer Drought Severity Index (PDSI) in Burkina Faso
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
-\section{Discussion}
+\section{Conclusion}
 To handle the complex environmental scenarios encountered in the Burkina Faso due to the climate change, we propose a pairwise comparative mapping and image processing of the data on years 2013 and 2020 for each evaluated climatic and environmental parameter. The presented data visualization by scripts is a semi-automated mapping process run trough a console which is interleaved with adjustment of selected parameters in script for each map according to the data range and extend. Using scripts, we are able to incorporate the spatial contiguity of the geospatial continuum fields and analyse their variability over space, thereby fully realising the potential of the scripting cartographic method. 
 
 In this work, we proposed a scripting approach for cartographic data processing aimed at mapping climate and land cover variables by GMT and R. It is built ua console-based method of data handling that uses syntax of programming languages for visualization of spatial datasets. Therefore, prewritten codes are sufficient enough to achieve a high level of speed for plotting data with high accuracy of the final outputs as a series of maps. Practical issues of the used methodology include the advantages of open source tools. While the commercial GIS, besides being expensive, sometimes include unfixed bugs and restricted functionality, and creates a certain dependence of a user on software vendors, open source GMT and R are available in full functionality with regular updates of the modified versions. 
@@ -638,11 +639,6 @@ In this work, we proposed a scripting approach for cartographic data processing 
 Further, the geospatial representation approach offered by the GMT scripting toolset and R language returns a effective series of maps showing target environmental parameters over the area of Burkina Faso for 2013 and 2022 for comparison of the dynamics. Extensive experiments with scripts on TerraClimate and remote sensing data demonstrate that our method outperforms various state-of-the-art GIS approaches and can be extended on a wider range of complex environmental scenarios in West Africa. Moreover, practical issues including data analysis and comparison of the dynamics of climate variables  and vegetation coverage derived from satellite images are handled under our unified GMT-R framework.
 
 On the basis of the GMT and R tools, an image processing and mapping were implemented that allow for climate and environmental analysis of the presented series of maps covering Burkina Faso. The demonstrated scripting method of R is robust to processing data using unsupervised learning algorithm of k-means clustering that we used for land cover classification. We demonstrated that libraries of R are capable of efficient image processing for environmental purposes and vegetation mapping. Thus, we performed the partitioning of pixels on the satellite images into defined land cover classes categorised into groups according to the similarity of their spectral reflectances, and demonstrated the difference of land cover classes for 2013 and 2022 in Burkina Faso.
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Conclusions}
-
-
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \vspace{6pt} 
@@ -686,10 +682,10 @@ VHR & Very High Resolution
 \appendixstart
 \appendix
 \section[\appendixname~\thesection]{}
-\subsection[\appendixname~\thesubsection]{Results of the computed unsupervised classification (2013)}
-\begin{lstlisting}[language=R,numbers=left,caption=\textbf{Results of the clustering of the Landsat-8 OLI/TIRS image (2013)}]
-unsuperClass results
+\subsection[\appendixname~\thesubsection]{Results of the computed unsupervised classification (2013): clustering of the Landsat-8 OLI/TIRS image (2013)}
 
+\begin{small}
+\begin{verbatim}
 *************** Model ******************
 $model
 K-means clustering with 10 clusters of sizes 
@@ -788,12 +784,113 @@ crs        : +proj=utm +zone=30 +datum=WGS84 +units=m +no_defs
 source     : r_tmp_2023-01-22_145808_95034_17510.grd 
 names      : class 
 values     : 1, 10  (min, max)
-\end{lstlisting}
+\end{verbatim} 
+\end{small}
 
-\begin{lstlisting}[language=R,numbers=left,caption=\textbf{Results of the clustering of the Landsat-8 OLI/TIRS image (2022)}]
-unsuperClass results*************** Model ******************$modelK-means clustering with 10 clusters of sizes 4, 9, 13, 1, 18, 8, 1, 20, 11, 15Cluster centroids:   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B11                                       11011.7502                                        9336.4443                                       10578.7694                                        4754.0005                                        9667.1116                                        8933.1257                                        4468.0008                                       10271.6509                                        9573.81810                                       9855.733   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B21                                        11976.252                                        10192.443                                        11707.314                                         7913.005                                        10677.006                                         9790.007                                         7616.008                                        11237.109                                        10389.8210                                       10789.40   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B31                                        15083.252                                        12363.673                                        14619.314                                        14343.005                                        13239.396                                        11744.127                                        11846.008                                        13903.009                                        12660.7310                                       13184.67   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B41                                        18347.752                                        14332.783                                        17550.464                                        17431.005                                        15494.726                                        13494.007                                        14428.008                                        16494.159                                        15077.2710                                       15543.13   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B51                                        22078.002                                        17967.783                                        21226.544                                        20995.005                                        19791.066                                        16980.627                                        17511.008                                        20518.509                                        18044.8210                                       19395.73   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B61                                        26910.002                                        21401.003                                        24825.084                                        24269.005                                        22311.726                                        19593.887                                        18156.008                                        23698.459                                        22910.7310                                       23910.80   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B71                                        23312.502                                        17217.223                                        20677.924                                        20391.005                                        18186.566                                        16052.627                                        15714.008                                        19731.059                                        18731.3610                                       19561.47Within cluster sum of squares by cluster: [1] 10243744 13359721 29109152        0 28575937 20311570        0 29155830 16295670[10] 14514939*************** Map ******************$mapclass      : RasterLayer dimensions : 7721, 7561, 58378481  (nrow, ncol, ncell)resolution : 30, 30  (x, y)extent     : 545085, 771915, 1322685, 1554315  (xmin, xmax, ymin, ymax)crs        : +proj=utm +zone=30 +datum=WGS84 +units=m +no_defs source     : r_tmp_2023-01-22_155940_745_17510.grd names      : class values     : 1, 10  (min, max)
-\end{lstlisting}
+\subsection[\appendixname~\thesubsection]{Results of the computed unsupervised classification (2022): clustering of the Landsat-8 OLI/TIRS image (2022)}
+\begin{small}
+\begin{verbatim}
+unsuperClass results
 
+*************** Model ******************
+$model
+K-means clustering with 10 clusters of sizes 4, 9, 13, 1, 18, 8, 1, 20, 11, 15
+
+Cluster centroids:
+   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B1
+1                                       11011.750
+2                                        9336.444
+3                                       10578.769
+4                                        4754.000
+5                                        9667.111
+6                                        8933.125
+7                                        4468.000
+8                                       10271.650
+9                                        9573.818
+10                                       9855.733
+   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B2
+1                                        11976.25
+2                                        10192.44
+3                                        11707.31
+4                                         7913.00
+5                                        10677.00
+6                                         9790.00
+7                                         7616.00
+8                                        11237.10
+9                                        10389.82
+10                                       10789.40
+   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B3
+1                                        15083.25
+2                                        12363.67
+3                                        14619.31
+4                                        14343.00
+5                                        13239.39
+6                                        11744.12
+7                                        11846.00
+8                                        13903.00
+9                                        12660.73
+10                                       13184.67
+   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B4
+1                                        18347.75
+2                                        14332.78
+3                                        17550.46
+4                                        17431.00
+5                                        15494.72
+6                                        13494.00
+7                                        14428.00
+8                                        16494.15
+9                                        15077.27
+10                                       15543.13
+   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B5
+1                                        22078.00
+2                                        17967.78
+3                                        21226.54
+4                                        20995.00
+5                                        19791.06
+6                                        16980.62
+7                                        17511.00
+8                                        20518.50
+9                                        18044.82
+10                                       19395.73
+   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B6
+1                                        26910.00
+2                                        21401.00
+3                                        24825.08
+4                                        24269.00
+5                                        22311.72
+6                                        19593.88
+7                                        18156.00
+8                                        23698.45
+9                                        22910.73
+10                                       23910.80
+   LC08_L2SP_195051_20220513_20220519_02_T1_SR_B7
+1                                        23312.50
+2                                        17217.22
+3                                        20677.92
+4                                        20391.00
+5                                        18186.56
+6                                        16052.62
+7                                        15714.00
+8                                        19731.05
+9                                        18731.36
+10                                       19561.47
+
+Within cluster sum of squares by cluster:
+ [1] 10243744 13359721 29109152        0 28575937 20311570        0 29155830 16295670
+[10] 14514939
+
+*************** Map ******************
+$map
+class      : RasterLayer 
+dimensions : 7721, 7561, 58378481  (nrow, ncol, ncell)
+resolution : 30, 30  (x, y)
+extent     : 545085, 771915, 1322685, 1554315  (xmin, xmax, ymin, ymax)
+crs        : +proj=utm +zone=30 +datum=WGS84 +units=m +no_defs 
+source     : r_tmp_2023-01-22_155940_745_17510.grd 
+names      : class 
+values     : 1, 10  (min, max)
+\end{verbatim} 
+\end{small}
 
 \reftitle{References}
 
