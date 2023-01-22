@@ -158,7 +158,7 @@ In contrast to drought and desertification related to precipitation and rainfall
 \subsection{Data}
 This study included various data used for mapping climate parameters and land cover types. The climatic maps are based on the use of the TerraClimate high-resolution dataset showing monthly climate parameters \cite{Abatzoglou}. The general topographic map showing study area and the extent of the Burkina Faso in regional and global scales are based on the GEBCO/SRTM raster grid \cite{GEBCO}. 
 
-The satellite image analysis was based on the Landsat-8 OLI/TIRS scenes \cite{USGS} for Burkina Faso in years 2013 and 2022 obtained from the USGS repository GloVis. The detailed information on the Landsat imagery is available in supporting technical documentation \cite{Landsat9}. The major bands of the Landsat-8 OLI/TIRS have 11 spectral bands with resolution of 30 meters in most of the channels. The methodology of satellite image processing in R is based on the existing workflow \cite{jimaging8120317,app122412554}. We computed the Normalised Difference Vegetation Index (NDVI) and performed image classification for land cover changes.
+The satellite image analysis was based on the Landsat-8 OLI/TIRS scenes \cite{USGS} for Burkina Faso in years 2013 and 2022 obtained from the USGS repository \href{https://earthexplorer.usgs.gov/}{EarthExplorer}. The detailed information on the Landsat imagery is available in supporting technical documentation \cite{Landsat9}. The major bands of the Landsat-8 OLI/TIRS have 11 spectral bands with resolution of 30 meters in most of the channels. The methodology of satellite image processing in R is based on the existing workflow \cite{jimaging8120317,app122412554}. We computed the Normalised Difference Vegetation Index (NDVI) and performed image classification for land cover changes.
 
 %----------- subsection ----------->
 \subsection{Mapping climate parameters in GMT}
@@ -246,7 +246,15 @@ The full GMT scripts are presented in the Supplementary Materials of this articl
 
 %----------- subsection ----------->
 \subsection{Image porcessing in R}
-In order to evaluate land cover changes and assess changes in vegetation coverage, we examined the tropical  land cover density of forest coverage and health conditions using the Normalised Difference Vegetation Index (NDVI) computed using R language \cite{RCoreTeam}. The main components of the R scripting techniques include libraries \emph{terra, raster} and auxiliary packages such as \emph{RColorBrewer, graphics, rgdal}. The \emph{rgdal} library was used to handle spatial data by integrating R with Geospatial Data Abstraction Library (GDAL) for processing various spatial data formats, including GeoTIFF. The \emph{rgdal} was used to apply the GDAL functionality to read GeoTIFF files into memory, then passes files to the libraries of R. The import, access and conversion of raster datasets to geospatial format were further processed by the RStudio. 
+The satellite image processing in R was applied to the 
+In order to evaluate land cover changes and assess changes in vegetation coverage, we examined the tropical  land cover density of forest coverage and health conditions using the Normalised Difference Vegetation Index (NDVI) computed using R language \cite{RCoreTeam}. The main components of the R scripting techniques include libraries \emph{terra, raster} and auxiliary packages such as \emph{RColorBrewer, graphics, rgdal}. The \emph{rgdal} library was used to handle spatial data by integrating R with \href{https://gdal.org/}{Geospatial Data Abstraction Library (GDAL)} for processing various spatial data formats, including GeoTIFF. The \emph{rgdal} was used to apply the GDAL functionality to read GeoTIFF files into memory, then passes files to the libraries of R. The import, access and conversion of raster datasets to geospatial format were further processed by the RStudio. 
+
+\begin{figure}[H]
+\centering
+	\includegraphics[width=14.5 cm]{Untitled.jpg}
+	\caption{Data capture from the EarthExplorer repository of the USGS: Landsat-8 OLI/TIRS satellite image, central Burkina Faso, Ouagadougou. Background image: ESRI World imagery.
+	\label{fig00}}
+\end{figure}
  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
@@ -418,6 +426,59 @@ The variations in values of Palmer Drought Severity Index (PDSI) in Burkina Faso
         \label{fig11}
 \end{figure}
 
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+     \begin{subfigure}[r]{0.5\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{Fig_12a.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.5\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{Fig_12b.jpg}
+     \end{subfigure}
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+      \begin{subfigure}[r]{0.5\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{Fig_12c.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.5\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{Fig_12d.jpg}
+     \end{subfigure}   
+   }
+  \caption{NDVI for Burkina Faso. \textbf{(a)}: NDVI map (2013); \textbf{(b)}: Histogram (2013); \textbf{(c)}: NDVI map (2022); \textbf{(d)}: Histogram (2022).}
+        \label{fig12}
+\end{figure}
+
+\begin{figure}[H]
+\makebox[0.90\linewidth][r]{%
+     \begin{subfigure}[r]{0.5\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{Fig_13a.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.5\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{Fig_13b.jpg}
+     \end{subfigure}
+}\\
+\vfill \vspace{1mm}
+\makebox[0.90\linewidth][r]{%
+      \begin{subfigure}[r]{0.5\textwidth}
+         \caption{} \vspace{1mm}
+         	\includegraphics[width=8.5cm]{Fig_13c.jpg}
+     \end{subfigure}\hspace{12mm}
+     \begin{subfigure}[r]{0.5\textwidth}
+             \caption{} \vspace{1mm}
+         	\includegraphics[width=7.2cm]{Fig_13d.jpg}
+     \end{subfigure}   
+   }
+  \caption{SAVI for Burkina Faso. \textbf{(a)}: SAVI map (2013); \textbf{(b)}: SAVI (2013); \textbf{(c)}: SAVI map (2022); \textbf{(d)}: Histogram (2022).}
+        \label{fig12}
+\end{figure}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \pagebreak
 \section{Discussion}
@@ -456,6 +517,7 @@ The following abbreviations are used in this manuscript:\\
 
 \noindent 
 \begin{tabular}{@{}ll}
+ESRI & Environmental Systems Research Institute \\
 GEBCO & General Bathymetric Chart of the Oceans \\
 GMT & Generic Mapping Tools \\
 GIS & Geographic Information System \\
