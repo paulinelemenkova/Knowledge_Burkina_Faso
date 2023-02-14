@@ -2,7 +2,7 @@
 %  For support, please attach all files needed for compiling as well as the log file, and specify your operating system, LaTeX version, and LaTeX editor.
 
 %=================================================================
-\documentclass[atmosphere,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
+\documentclass[knowledge,article,submit,pdftex,moreauthors]{Definitions/mdpi} 
 
 %=================================================================
 % MDPI internal commands
@@ -16,8 +16,8 @@
 \pubyear{2023}
 \copyrightyear{2023}
 %\externaleditor{Academic Editor: Firstname Lastname}
-\datereceived{22 January 2023} 
-%\daterevised{} % Only for the journal Acoustics
+\datereceived{14 February 2023} 
+\daterevised{} 
 \dateaccepted{} 
 \datepublished{} 
 %\datecorrected{} % Corrected papers include a "Corrected: XXX" date in the original paper.
@@ -43,10 +43,10 @@
 
 %=================================================================
 % Full title of the paper (Capitalized)
-\Title{Mapping Land Cover Changes and Dynamics of Deforestation in Burkina Faso Based on Landsat Scenes and TerraClimate Data}
+\Title{Extracting Information from Geospatial Datasets to Analyse Land Cover Types and Deforestation in Burkina Faso}
 
 % MDPI internal command: Title for citation in the left column
-\TitleCitation{Mapping Land Cover Changes and Dynamics of Deforestation in Burkina Faso Based on Landsat Scenes and TerraClimate Data}
+\TitleCitation{Extracting Information from Geospatial Datasets to Analyse Land Cover Types and Deforestation in Burkina Faso}
 
 % Author Orchid ID: enter ID or remove command
 \newcommand{\orcidauthorA}{0000-0002-5759-1089} % Add \orcidA{} behind the author's name
@@ -73,7 +73,7 @@ $^{1}$ \quad Laboratory of Image Synthesis and Analysis (LISA), École polytechn
 
 % Abstract (Do not insert blank lines, i.e. \\) 
 \abstract{
-Situated in the southern Sahel zone, Burkina Faso experiences one of the most extreme climatic hazards in Sub-Saharan Africa. These vary from extreme floods in Volta River Basin, one of the most vulnerable regions in West Africa to hydrological disasters, to desertification and recurrent droughts caused by the rise in annual temperatures and decreased runoff. Besides climate factors, anthropogenic activities contribute to land degradation and deforestation through agricultural lands expansion of croplands, which leads to the decrease of woody savannah and gallery forests in the country. High exposure and low adaptive capacity to climate-related hazards require development of adaptive strategies in Burkina Faso with aim to control food management, secure agricultural production and maintain environmental sustainability. In this paper, we demonstrated the integrated use of the remote sensing data and climate parameters for mapping climate parameters and vegetation dynamics using scripting cartographic techniques. For problems of computer vision and analytical modelling in cartography, reliable datasets are essential. Therefore, we used the satellite imagery scenes from the Landsat 8-9 OLI/TIRS C2 L1 collection for mapping changes in forest and savannah coverage in Burkina Faso, and TerraClimate data for visualizing key climate parameters. Using integrated dataset we visualised the dynamics of target climate characteristics of Burkina Faso for 2013-2022: extreme temperatures, level of precipitation, soil moisture, downward surface shortwave radiation, vapor pressure deficit and anomaly. Additionally, the Palmer Drought Severity Index (PDSI) was modelled over the study area to estimate soil water balance related to soil moisture conditions as a prerequisites for vegetation growth. This paper contributes the to environmental analysis and monitoring of Burkina Faso with aim to highlight the links between climate processes and vegetation dynamics in West Africa. 
+Extracting spatial information from geographic data is essential to get knowledge on the environmental processes. In this paper, we processed structured datasets to find trends related to deforestation and land cover changes in West Africa. Situated in the southern Sahel zone, Burkina Faso experiences one of the most extreme climatic hazards in Sub-Saharan Africa. These vary from extreme floods in Volta River Basin, one of the most vulnerable regions in West Africa to hydrological disasters, to desertification and recurrent droughts caused by the rise in annual temperatures and decreased runoff. Besides climate factors, anthropogenic activities contribute to land degradation and deforestation through agricultural lands expansion of croplands, which leads to the decrease of woody savannah and gallery forests in the country. High exposure and low adaptive capacity to climate-related hazards require development of adaptive strategies in Burkina Faso with aim to control food management, secure agricultural production and maintain environmental sustainability. In this paper, we demonstrated the integrated use of the remote sensing data and climate parameters for mapping climate parameters and vegetation dynamics using scripting cartographic techniques. For problems of computer vision and analytical modelling in cartography, reliable datasets are essential. Therefore, we used the satellite imagery scenes from the Landsat 8-9 OLI/TIRS C2 L1 collection for mapping changes in forest and savannah coverage in Burkina Faso, and TerraClimate data for visualizing key climate parameters. Using integrated dataset we visualised the dynamics of target climate characteristics of Burkina Faso for 2013-2022: extreme temperatures, level of precipitation, soil moisture, downward surface shortwave radiation, vapour pressure deficit and anomaly. Additionally, the Palmer Drought Severity Index (PDSI) was modelled over the study area to estimate soil water balance related to soil moisture conditions as a prerequisites for vegetation growth. This paper contributes the to environmental analysis and monitoring of Burkina Faso with aim to highlight the links between climate processes and vegetation dynamics in West Africa. 
 }
 
 % Keywords
@@ -119,11 +119,9 @@ In this work we consider the problem of climate and environmental mapping using 
 We demonstrate that a better console-based maps can be obtained by application of GMT for cartographic workflow in particular for comparison of parameters for two target years and pairwise images. In such cases, the scripts were optimised to highlight the variability of continuum fields of the represented climatic variables using adjusted colour map palettes. Such strategy produces good recognition accuracy for evaluation of climate shifts in the years 2013-2022. We propose two distinct approaches by GMT and R  to process automatically geospatial datasets of diverse origin and types: the first (GMT) optimises the cartographic workflow for plotting a series of climatic maps; the second (R) is applied for satellite image processing and automated unsupervised classification. When compared to existing works of GIS, we show that our scripting approach provides better accuracy and aesthetics in terms of quality and representation of maps.
 
 %\pagebreak
-\section{Study Area}
+\section{Study Area} 
 
-The problems of climate change in sub-Saharan Africa are largely discussed in many recent papers \cite{AYANLADE2022100311,EMEDIEGWU2022105967,WAONGO201523,AZIBO2015126,ASCOTT2022128107,WEBBER2014161,WAHA2013130,olsson1993desertification}. Major risks of climate change include the decline in precipitation and increase in annual temperatures. As a consequence, such trends results in changed vegetation patterns, deforestation and desertification in West Africa, and negatively affect food production in agricultural sector, both rainfed and irrigated crop yields \cite{CALZADILLA2013150,WAONGO201523}. 
-
-A sub-Saharan African landlocked country situated in the southern Sahel (Figure \ref{fig01}), Burkina Faso experiences extreme climatic hazards \cite{Zougmore}. These vary from the extreme floods in Volta River Basin, one of the most vulnerable regions in West Africa to hydrological disasters, desertification \cite{rochette1989sahel,RASMUSSEN2001271,CAPOZZI2018281} and recurrent droughts \cite{OKAFOR2021100285,Kasei,REIJ2005642} caused by the rise in annual temperatures and decreased runoff. Previous studied \cite{gaisberger2017spatially} mentioned overexploitation, overgrazing, fire, cotton production, mining activities and climate change among the major threatening factors to existence of the selected vulnerable tree species in Burkina Faso. Other studies report high susceptibility of the country to mini-droughts, heatwaves, torrential rainfalls, and extreme weather events \cite{ijerph18094972}, as well as social consequences and adaptation strategies to climate change in Burkina Faso \cite{offerle2005urban,OUEDRAOGO2012270}.
+A sub-Saharan African landlocked country situated in the southern Sahel (Figure \ref{fig01}), Burkina Faso experiences extreme climatic hazards \cite{Zougmore}. These vary from the extreme floods in Volta River Basin, one of the most vulnerable regions in West Africa to hydrological disasters, desertification \cite{rochette1989sahel,RASMUSSEN2001271,CAPOZZI2018281} and recurrent droughts \cite{OKAFOR2021100285,Kasei,REIJ2005642} caused by the rise in annual temperatures and decreased runoff. The problems of climate change in sub-Saharan Africa are largely discussed in many recent papers \cite{AYANLADE2022100311,EMEDIEGWU2022105967,WAONGO201523,AZIBO2015126,ASCOTT2022128107,WEBBER2014161,WAHA2013130,olsson1993desertification}. Major risks of climate change include the decline in precipitation and increase in annual temperatures. As a consequence, such trends results in changed vegetation patterns, deforestation and desertification in West Africa, and negatively affect food production in agricultural sector, both rainfed and irrigated crop yields \cite{CALZADILLA2013150,WAONGO201523}.
 
 \begin{figure}[H]
 \centering
@@ -132,7 +130,7 @@ A sub-Saharan African landlocked country situated in the southern Sahel (Figure 
 	\label{fig01}}
 \end{figure}
 
-As a result, climate change issues pose high risks to the vegetation sustainability, food security in mixed crop–livestock systems \cite{RIGOLOT2017217}. The reported consequences of the climate impacts in Burkina Faso include changes in land cover types with detected increase in tree savannah, bare soils and agricultural lands, and decrease in woodland, gallery forest, shrub savannah and water areas \cite{DIMOBE2015559}. At the same time, the biodiversity loss indicate rapid climate shift and reflect changes in rainfall patterns, declining water balance and increased extreme climate events \cite{hannah2002conservation}. Besides climate factors, anthropogenic activities contribute to land degradation and deforestation through agricultural lands expansion of croplands, which leads to the decrease of woody savannah and gallery forests in the country. 
+Previous studied \cite{gaisberger2017spatially} mentioned overexploitation, overgrazing, fire, cotton production, mining activities and climate change among the major threatening factors to existence of the selected vulnerable tree species in Burkina Faso. Other studies report high susceptibility of the country to mini-droughts, heatwaves, torrential rainfalls, and extreme weather events \cite{ijerph18094972}, as well as social consequences and adaptation strategies to climate change in Burkina Faso \cite{offerle2005urban,OUEDRAOGO2012270}. Climate change issues pose high risks to the vegetation sustainability, food security in mixed crop–livestock systems \cite{RIGOLOT2017217}. The reported consequences of the climate impacts in Burkina Faso include changes in land cover types with detected increase in tree savannah, bare soils and agricultural lands, and decrease in woodland, gallery forest, shrub savannah and water areas \cite{DIMOBE2015559}. At the same time, the biodiversity loss indicate rapid climate shift and reflect changes in rainfall patterns, declining water balance and increased extreme climate events \cite{hannah2002conservation}. Besides climate factors, anthropogenic activities contribute to land degradation and deforestation through agricultural lands expansion of croplands, which leads to the decrease of woody savannah and gallery forests in the country. 
 
 At the same time, the economy of Burkina Faso, one of the least developed countries in the world with highest level of poverty, largely relies on agriculture and the use of natural resources \cite{1525946}. Common agricultural species mostly planted in semi-urban areas include sorghum, millet, maize and rice as the principal cereals \cite{SEOGO2023106475,ARUMUGAM2023126655}. Examples of other agricultural products include tomatoes, lettuce, cabbage, beans, eggplants, etc \cite{Ouedraogo2019}, typical for the individual small-scale farming households for subsistence farming. A moderate production of cotton (less than 1 t/ha) contributed to the development of traditional agrarian cropping systems in the savannahs of Burkina Faso and remains a notable feature of its agricultural and development policies \cite{Soumare}. However, recent issues of climate change resulted in continuous degradation in the agricultural-pastoral potentialities of the country, caused by both the intensive use of resources \cite{Vall} and climate change \cite{DIMOBE2022126299}. 
 
@@ -394,7 +392,7 @@ In this section, we provide a comprehensive description and analysis of the clim
         \label{fig03}
 \end{figure}
 
-The data extent for 2013 ranges from 10.47°C to 20.56°C, while the data for 2022 has the extent from 11.70°C to 21.20°C which clearly shows the increase of the temperature on 1°C over 9 years. The interannual variability in maximal temperature ranging from 27.78°C to 37.14°C in 2013 against 28.20°C to 37.00°C in 2020 is compared with spatial variability in topography of Burkina Faso at regional scale, Figure \ref{fig04}. 
+The data extent for 2013 ranges from 10.47°C to 20.56°C, while the data for 2022 has the extent from 11.70°C to 21.20°C which clearly shows the increase of the temperature on 1°C over 9 years. The interannual variability in maximal temperature ranging from 27.78°C to 37.14°C in 2013 against 28.20°C to 37.00°C in 2020 is compared with spatial variability in topography of Burkina Faso at regional scale, Figure \ref{fig04}. The data from from TerraClimate show an associations with orographic pattern of Mossi Plateau and Ténakourou Mnt. Thus, the areas of lower values in temperature are contoured by the isolines in Figure \ref{fig04} which correlate with the topography of the country that have an impact on the precipitation pattern in the mountainous regions. The same trend is clearly visible when compared the region with south-western part of the country (Ténakourou Mt) where the temperatures are lower than the values in the surrounding areas. This proves the effects of the topography on the climate variations and temperature.
 
 \begin{figure}[H]
 \makebox[0.90\linewidth][r]{%
@@ -410,8 +408,6 @@ The data extent for 2013 ranges from 10.47°C to 20.56°C, while the data for 20
   \caption{Maximum temperature for Burkina Faso. \textbf{(a)}: 2013; \textbf{(b)}: 2020.}
         \label{fig04}
 \end{figure}
-
-The data from from TerraClimate show an associations with orographic pattern of Mossi Plateau and Ténakourou Mnt. Thus, the areas of lower values in temperature are contoured by the isolines in Figure \ref{fig04} which correlate with the topography of the country that have an impact on the precipitation pattern in the mountainous regions. The same trend is clearly visible when compared the region with south-western part of the country (Ténakourou Mt) where the temperatures are lower than the values in the surrounding areas. This proves the effects of the topography on the climate variations and temperature.
 
 The analysis of soil dynamics of moisture over the country (Figure \ref{fig05}) shows that in 2013 the maximal values were 172.10 mm/m with mean at 31.66 mm/m while in 2022 the maximal value is only 150.40 mm/m with mean at 27.92 mm/m, showing the decrease in soil moisture and the increase in dry lands in Burkina Faso over the recent 9 years. This well correlates with the data on potential evapotranspiration (Figure \ref{fig06}).
 \begin{figure}[H]
@@ -653,7 +649,7 @@ On the basis of the GMT and R tools, an image processing and mapping were implem
 
 \authorcontributions{Supervision, conceptualization, methodology, software, resources, funding acquisition, and project administration, O.D.; writing---original draft preparation, methodology, software, data curation, visualization, formal analysis, validation, writing---review and editing, and investigation, P.L. All authors have read and agreed to the published version of the manuscript.}
 
-\funding{The publication was funded by the Editorial Office of XXXX, Multidisciplinary Digital Publishing Institute (MDPI), by providing 100\% discount for the APC of this manuscript. This project was supported by the Federal Public Planning Service Science Policy or Belgian Science Policy Office, Federal Science Policy - BELSPO (B2/202/P2/SEISMOSTORM).}
+\funding{This project was supported by the Federal Public Planning Service Science Policy or Belgian Science Policy Office, Federal Science Policy - BELSPO (B2/202/P2/SEISMOSTORM).}
 
 \institutionalreview{Not applicable}
 
